@@ -13,6 +13,11 @@ exports = module.exports = function(app, mongoose) {
   require('./schema/AdminGroup')(app, mongoose);
   require('./schema/Account')(app, mongoose);
   require('./schema/LoginAttempt')(app, mongoose);
+<<<<<<< HEAD
     
   require('./schema/post')(app, mongoose);
+=======
+
+  require('./schema/Post')(app, mongoose);
+>>>>>>> aecf73f... add Post schema
 };
