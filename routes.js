@@ -175,6 +175,7 @@ exports = module.exports = function(app, passport) {
   app.get('/account/settings/tumblr/disconnect/', require('./views/account/settings/index').disconnectTumblr);
 
   /* REST APIs */
+<<<<<<< HEAD
   app.get('/1/post', cors(), require('./views/api/post').readPost);
   app.get('/1/post/:id', cors(), require('./views/api/post').readPostById);
   app.get('/1/post/subject/:subject', cors(), require('./views/api/post').readPostBySubject);
@@ -182,6 +183,15 @@ exports = module.exports = function(app, passport) {
   app.put('/1/post', cors(), require('./views/api/post').updatePost);
   app.put('/1/post/:subject/publish', cors(), require('./views/api/post').publish);
   app.put('/1/post/:subject/unpublish', cors(), require('./views/api/post').unpublish);
+=======
+  app.get('/1/post', require('./view/api/post').readPost);
+  app.get('/1/post/:id', require('./view/api/post').readPostById);
+  app.get('/1/post/subject/:subject', require('./view/api/post').readPostBySubject);
+  app.post('/1/post', require('./views/api/post').createPost);
+  app.put('/1/post', require('./view/api/post').updatePost);
+  app.put('/1/post/:subject/publish', require('./view/api/post').publish);
+  app.put('/1/post/:subject/unpublish', require('./view/api/post').unpublish);
+>>>>>>> 8627138... define REST APIs: post system
 
   //route not found
   app.all('*', require('./views/http/index').http404);
