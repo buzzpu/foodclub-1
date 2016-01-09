@@ -5,14 +5,14 @@ exports.readPost = function(req, res, next) {
 
 exports.createPost = function(req, res, next) {
     var workflow = req.app.utility.workflow(req, res);
-    var title = req.query.title;
-    var message = req.query.message;
+    var title = req.body.title;
+    var message = req.body.message;
     var fieldsToSet;
     
     workflow.on('validate', function(){
        fieldsToSet = {
-           title: 'buzz',
-           message: 'hello0109'
+           title: title,
+           message: message
        };
         workflow.emit('save');
     });
