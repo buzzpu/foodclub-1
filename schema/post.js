@@ -10,5 +10,5 @@ exports = module.exports = function(app, mongoose) {
       time: { type: Date, default: Date.now }
     }
   });
-  app.db.model('post', noteSchema);
+  app.db.model('Post', postSchema);
 };

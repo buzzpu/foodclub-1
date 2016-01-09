@@ -7,13 +7,25 @@ exports.createPost = function(req, res, next) {
     var workflow = req.app.utility.workflow(req, res);
     var title = req.query.title;
     var message = req.query.message;
+    var fieldsToSet;
     
     workflow.on('validate', function(){
-       workflow.outcom.data = {
-           name: 'buzz'
-       }
+       fieldsToSet = {
+           title: 'buzz',
+           message: 'hello0109'
+       };
+        workflow.emit('save');
     });
-    workflow.emit('reponse');
+    workflow.on('save', function(){
+        req.app.db.models.Post.create(fieldsToSet, function(err, post){
+           if(err){
+               return workflow.emit('exception', err);
+           }
+           workflow.outcome.post = post; 
+            workflow.emit('reponse');
+        });
+    });
+    return workflow.emit('validate');
 };
 
 exports.readPostById = function(req, res, next) {
