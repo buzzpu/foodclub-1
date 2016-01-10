@@ -20,7 +20,31 @@ require('../models')(app, mongoose);
 
 // http request
 request
-  ('http://api.openweathermap.org/data/2.5/weather?q=Taipei&APPID=2ab10d1d7c261f5cb373916cc1cf107f'
+  ('http://api.openweathermap.org/data/2.5/weather?q=Taipei&APPID=a04156f6229adbb7ce4534622fe5b147'
   , function(error, response, body) {
     console.log(body);
+    
+    var obj = JSON.parse(body);
+    
+    var fieldsToSet = {
+        coord: {
+            lon: obj.coord.lon,
+            lat: obj.coord.lat,
+        }, 
+        main: {
+            temp: obj.main.temp,
+            humidity: obj.main.humidity,
+        } 
+    };
+
+    app.db.models.Weather.create(fieldsToSet, function(err, weatherSchema){
+        if(err){
+            console.log("... err")
+            return 
+        }
+        console.log("... saved");
+        console.log(weatherSchema);
+    });
+    
+    
 });
